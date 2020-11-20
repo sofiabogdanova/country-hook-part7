@@ -15,22 +15,6 @@ const useField = (type) => {
   }
 }
 
-// const useCountry = (name) => {
-//   const [country, setCountry] = useState(null)
-//   //setCountry(name)
-//   //https://restcountries.eu/rest/v2/name/{name}?fullText=true
-//   useEffect(
-//       () => {
-//         const countryInfo = axios
-//             .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
-//             .then(resp => console.log(resp))
-//       }/*,
-//       [props.source],*/
-//   );
-//
-//   return country
-// }
-
 const useCountry = (name) => {
     const [country, setCountry] = useState(null)
     useEffect(() => {
