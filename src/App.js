@@ -15,15 +15,53 @@ const useField = (type) => {
   }
 }
 
+// const useCountry = (name) => {
+//   const [country, setCountry] = useState(null)
+//   //setCountry(name)
+//   //https://restcountries.eu/rest/v2/name/{name}?fullText=true
+//   useEffect(
+//       () => {
+//         const countryInfo = axios
+//             .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
+//             .then(resp => console.log(resp))
+//       }/*,
+//       [props.source],*/
+//   );
+//
+//   return country
+// }
+
 const useCountry = (name) => {
-  const [country, setCountry] = useState(null)
+    const [country, setCountry] = useState(null)
+    useEffect(() => {
+        if (name!=='') {
+            const handleGetCountry = async () => {
+                const countryFound = {
+                    data: {},
+                    found: false
+                }
+                const response = await axios
+                    .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`,)
+                    .catch(err => {
+                        console.log(err)
+                    })
 
-  useEffect()
+                if (response) {
+                    countryFound.data = response.data[0]
+                    countryFound.found = true
+                }
 
-  return country
+                setCountry(countryFound)
+            }
+            handleGetCountry()
+        }
+    }, [name])
+    debugger
+    return country
 }
 
 const Country = ({ country }) => {
+    debugger
   if (!country) {
     return null
   }
@@ -53,6 +91,7 @@ const App = () => {
 
   const fetch = (e) => {
     e.preventDefault()
+
     setName(nameInput.value)
   }
 
